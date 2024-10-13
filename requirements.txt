@@ -3,4 +3,6 @@ pandas
 scikit-learn
 dill
 dataclasses
+xgboost
+catboost
 # -e .

@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 from dataclasses import dataclass
 from src.components.data_transformation import DataTransformation
-
+from src.components.model_trainer import Modeltrainer
 @dataclass
 class DataIngestionConfig:
     train_data_path = os.path.join('artifacts', 'train.csv')
@@ -50,4 +50,8 @@ if __name__=='__main__':
     train_arr, test_arr = obj.initiate_data_ingestion()
     
     preprocess_obj = DataTransformation()
-    preprocess_obj.initiate_data_transformation(train_arr, test_arr)
+    train_arr, test_arr, _ = preprocess_obj.initiate_data_transformation(train_arr, test_arr)
+    
+    model = Modeltrainer()
+    r2_sq = model.initiate_model_train(train_arr, test_arr)
+    print(f"R-squared value: {r2_sq}")
