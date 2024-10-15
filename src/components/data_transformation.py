@@ -50,13 +50,12 @@ class DataTransformation:
             logging.info(f"Categorical columns: {cat_columns}")
             logging.info(f"Numerical columns: {num_columns}")
             
-            preprocessor = ColumnTransformer(
+            preprocessor=ColumnTransformer(
                 [
-                    ("num_pipeline", num_pipeline, num_columns),
-                    ("cat_pipeline", cat_pipeline, cat_columns)
+                ("num_pipeline",num_pipeline,num_columns),
+                ("cat_pipelines",cat_pipeline,cat_columns)
                 ]
             )
-            
             return preprocessor
         
         except Exception as e:
@@ -71,7 +70,6 @@ class DataTransformation:
             logging.info("Data loaded successfully.")
             
             preprocessing_obj = self.get_data_transformation_obj()
-            
             target_columns = 'math_score'
             
             input_features_train_df = train_df.drop(columns=[target_columns], axis=1)
@@ -97,7 +95,7 @@ class DataTransformation:
             return (
                 train_arr,
                 test_arr,
-                self.data_transformation_config.preprocess_obj_file_path
+                self.data_transformation_config.preprocess_obj_file_path,
             )
         
         except Exception as e:

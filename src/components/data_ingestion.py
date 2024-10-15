@@ -2,8 +2,8 @@ import os
 import sys
 from src.logger import logging
 from src.exception import CustomException
-from sklearn.model_selection import train_test_split
-import pandas as pd
+from sklearn.model_selection import train_test_split # type: ignore
+import pandas as pd # type: ignore
 from dataclasses import dataclass
 from src.components.data_transformation import DataTransformation
 from src.components.model_trainer import Modeltrainer
@@ -50,7 +50,8 @@ if __name__=='__main__':
     train_arr, test_arr = obj.initiate_data_ingestion()
     
     preprocess_obj = DataTransformation()
-    train_arr, test_arr, _ = preprocess_obj.initiate_data_transformation(train_arr, test_arr)
+    pobj = preprocess_obj.initiate_data_transformation(train_arr, test_arr)
+    train_arr, test_arr, _= preprocess_obj.initiate_data_transformation(train_arr, test_arr)
     
     model = Modeltrainer()
     r2_sq = model.initiate_model_train(train_arr, test_arr)
